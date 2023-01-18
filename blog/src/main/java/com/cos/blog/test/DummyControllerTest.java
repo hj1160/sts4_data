@@ -82,5 +82,25 @@ public class DummyControllerTest {
 	}		
 
 	
+	//save함수는 id를 전달하지 않으면 insert 해주고
+	//save함수는 id를 전달하면 해당 id에 대한 데이터가 있으면 update를 해주고
+	//save함수는 id를 전달하면 해당 id에 대한 데이터가 없으면 insert를 함.
+	//email, password
+	@Transactional
+	@PutMapping("/dummy/user/{id}")
+	public User updateUser(@PathVariable int id, @RequestBody User requestUser) {//json데이터요청=>Java Object(MessageConverter의 Jackson라이브러리가 변횐해서 받아 줌)  
+		System.out.println("id:"+id); 
+		System.out.println("password:"+requestUser.getPassword());
+		System.out.println("email:"+requestUser.getEmail());
+		
+		User user = userRepository.findById(id).orElseThrow(()->{
+			return new IllegalArgumentException("수정에 실패하였습니다.");
+		});
+		user.setPassword(requestUser.getPassword());
+		user.setEmail(requestUser.getEmail());
 
+		//userRepository.save(user);
+		return null;
+	}	
+	
 }
