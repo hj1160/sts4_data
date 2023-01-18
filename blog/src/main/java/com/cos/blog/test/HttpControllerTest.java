@@ -13,25 +13,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HttpControllerTest {
 
-	//http://localhost:8000/http/get?id=1&username=ezen&password=123&email=ezen@naver.com
-	
-	
 	//http://localhost:8000/http/get(select)
 	@GetMapping("http/get")
 	public String getTest(Member m) {
-		return "get 요청:"+ m.getId()+","+m.getUsername()+","+m.getPassword()+","+m.getEmail();
+		return "get 요청 : " + m.getId()+","+m.getUsername()+","+m.getPassword()+","+m.getEmail(); 
 	}
 	
 	//http://localhost:8000/http/post(insert)
 	@PostMapping("http/post")
-	public String postTest(@RequestBody Member m) { //MessageConverter(스프링부트)
-		return "post 요청:" +m.getId()+","+m.getUsername()+","+m.getPassword()+","+m.getEmail();
+	public String postTest(@RequestBody Member m) {
+		return "post 요청 : "+ m.getId()+","+m.getUsername()+","+m.getPassword()+","+m.getEmail();
 	}
 	
 	//http://localhost:8000/http/put(update)
 	@PutMapping("http/put")
 	public String putTest(@RequestBody Member m) {
-		return "put 요청: " +m.getId()+","+m.getUsername()+","+m.getPassword()+","+m.getEmail();
+		return "put 요청"+ m.getId()+","+m.getUsername()+","+m.getPassword()+","+m.getEmail();
 	}
 	
 	//http://localhost:8000/http/delete(delete)
@@ -41,17 +38,32 @@ public class HttpControllerTest {
 	}
 	
 	private static final String TAG="HttpControllerTest";
-			
 	
 	//http://localhost:8000/http/lombok
 	@GetMapping("/http/lombok")
-	public String lombokTest() {
-	  Member m = new Member().builder().username("ssar").password("1234").email("ssar@nate.com").build();
-	  System.out.println(TAG+"getter:"+m.getId());
-	  m.setId(5000);
-	  System.out.println(TAG+"setter:"+m.getId());
-	  return "lombok test 완료";
+	public String lombokTest(){
+		Member m = Member.builder().username("ssar").password("1234").email("ssar@nate.com").build();
+		System.out.println(TAG+"getter : " + m.getId());
+		m.setId(5000);
+		System.out.println(TAG+"setter : " + m.getId());
+		return "lombok test 완료";
 	}
 	
 	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
